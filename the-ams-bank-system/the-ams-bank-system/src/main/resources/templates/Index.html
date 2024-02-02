@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Management</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/script.js}" defer></script>
+    <script th:src="@{/updateAccount.js}" defer></script>
+</head>
+<body>
+<div class="header">
+    <h1>AMS Bank System - Account Management</h1>
+</div>
+
+<div class="content">
+    <h2>Create New Account</h2>
+    <form id="createAccountForm">
+        <input type="text" id="newAccountNumber" placeholder="Account Number" required />
+        <input type="number" id="newBalance" placeholder="Initial Balance" required />
+        <button type="submit">Create Account</button>
+    </form>
+
+    <h2>Accounts</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Account Number</th>
+            <th>Balance</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.accountNumber}"></td>
+            <td th:text="${account.balance}"></td>
+            <td>
+                <a th:href="@{/api/accounts/update/{id}(id=${account.id})}">Update</a>
+                <form th:action="@{/api/accounts/{id}(id=${account.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="footer">
+    <p>AMS-A Group-04</p>
+</div>
+
+</body>
+</html>

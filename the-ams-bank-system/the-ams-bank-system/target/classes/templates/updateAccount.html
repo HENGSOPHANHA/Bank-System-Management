@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Account</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/updateAccount.js}" defer></script>
+</head>
+<body>
+<div class="header">
+    <h1>Update Account</h1>
+</div>
+
+<div class="content">
+    <form th:action="@{/api/accounts/update}" th:object="${account}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <input type="text" th:field="*{accountNumber}" placeholder="Account Number" required />
+        <input type="number" th:field="*{balance}" placeholder="Balance" required />
+        <button type="submit">Update Account</button>
+    </form>
+</div>
+
+<div class="footer">
+    <p>AMS-A Group 04</p>
+</div>
+</body>
+</html>
